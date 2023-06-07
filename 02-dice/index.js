@@ -1,6 +1,6 @@
-function dice(side) {
-  const num = Number(side.replace(/\D/g, ''));
-  return Math.floor(Math.random() * num + 1);
+function dice(dice) {
+  const sidesAmount = Number(dice.replace(/\D/g, ''));
+  return Math.floor(Math.random() * sidesAmount + 1);
 }
 
 console.log(dice('d4'));

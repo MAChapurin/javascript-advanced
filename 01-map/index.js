@@ -1,3 +1,11 @@
+'use strict';
+
+function getUnigArrayOfObj(arr) {
+  return [...new Set(arr.map((el) => JSON.stringify(el)))].map((el) =>
+    JSON.parse(el)
+  );
+}
+
 const users = [
   { id: 1, name: 'Wasya' },
   { id: 2, name: 'Petya' },
@@ -9,10 +17,5 @@ const users = [
   { id: 4, name: 'Rita' },
 ];
 
-const newSet = new Set();
-users.map((el, _, users) => {
-  newSet.add(users.find((user) => user.id === el.id && user.name === el.name));
-});
-
 console.log('Исходный массив: \n', users);
-console.log('Уникализированный с помощью Set масссив: \n',[...newSet]);
+console.log('Уникализированный масссив: \n', getUnigArrayOfObj(users));
