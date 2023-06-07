@@ -1,9 +1,9 @@
 'use strict';
 
 function getUnigArrayOfObj(arr) {
-  return [...new Set(arr.map((el) => JSON.stringify(el)))].map((el) =>
-    JSON.parse(el)
-  );
+  const arrayToJSON = arr.map((el) => JSON.stringify(el));
+  const arrayWithoutRepeatingElements = new Set(arrayToJSON);
+  return [...arrayWithoutRepeatingElements].map((el) => JSON.parse(el));
 }
 
 const users = [
