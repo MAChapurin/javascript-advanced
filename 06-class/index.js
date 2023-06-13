@@ -1,29 +1,29 @@
 'use strict';
 
 class Car {
-  #_mark;
-  #_model;
-  #_milliage;
+  #mark;
+  #model;
+  #milliage;
   constructor(mark, model, milliage) {
-    (this.#_mark = mark), (this.#_model = model), (this.#_milliage = milliage);
+    (this.#mark = mark), (this.#model = model), (this.#milliage = milliage);
   }
 
   get milliage() {
-    return this.#_milliage;
+    return this.#milliage;
   }
 
   set milliage(miles) {
     if (typeof miles === 'number' && miles >= 0) {
-      this.#_milliage = miles;
+      this.#milliage = miles;
     }
   }
 
   twistMilliage(miles) {
-    this.milliage = miles ? miles : 0;
+    this.milliage = miles ?? 0;
   }
 
   info() {
-    console.log(`${this.#_mark} ${this.#_model} - ${this.#_milliage} miles`);
+    console.log(`${this.#mark} ${this.#model} - ${this.#milliage} miles`);
   }
 }
 
