@@ -12,9 +12,9 @@ class Person {
 }
 
 class Ork extends Person {
-  #race = 'Орк';
   constructor(race, name, language, weapon) {
-    super(race, name, language), (this.race = this.#race), (this.weapon = weapon);
+    super(race, name, language);
+    this.weapon = weapon;
   }
 
   say() {
@@ -29,10 +29,9 @@ class Ork extends Person {
 }
 
 class Elf extends Person {
-  #race = 'Эльф';
   constructor(race, name, language, magic) {
     super(race, name, language);
-    (this.race = this.#race), (this.magic = magic);
+    this.magic = magic;
   }
 
   say() {

@@ -14,7 +14,10 @@ xhr.onload = function() {
   newXhr.responseType = 'json';
   newXhr.send();
   newXhr.onload = function() {
-    console.log(newXhr.response.effect_entries[1].effect);
+    function getData() {
+      return newXhr.response.effect_entries[1].effect;
+    }
+    console.log(getData());
   }
 };
 
