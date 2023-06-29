@@ -1,6 +1,6 @@
 'use strict';
 
-const SECUNDS_IN_MILLISECONDS = 1000;
+const SECONDS_IN_MILLISECONDS = 1000;
 const MINUTE_IN_MILLISECONDS = 1000 * 60;
 const HOUR_IN_MILLISECONDS = MINUTE_IN_MILLISECONDS * 60;
 
@@ -85,7 +85,7 @@ function updateDate(element, date, timerId, text = '') {
   const days = getRestDays();
   const hours = Math.floor(restTime / HOUR_IN_MILLISECONDS) % 24;
   const minutes = Math.floor(restTime / MINUTE_IN_MILLISECONDS) % 60;
-  const seconds = Math.floor(restTime / SECUNDS_IN_MILLISECONDS) % 60;
+  const seconds = Math.floor(restTime / SECONDS_IN_MILLISECONDS) % 60;
   element.textContent = `${text} 
   ${years > 0 ? `${years} ${pluralize(years, ...yearsWords)}` : ''}
   ${month > 0 ? `${month} ${pluralize(month, ...monthWords)}` : ''}
@@ -95,17 +95,17 @@ function updateDate(element, date, timerId, text = '') {
   ${seconds > 0 ? `${seconds} ${pluralize(seconds, ...secondsWords)}` : ''}`;
 }
 
-const title1 = document.querySelector('.title1');
-const title2 = document.querySelector('.title2');
-const title3 = document.querySelector('.title3');
-const title4 = document.querySelector('.title4');
+const timer1 = document.getElementById('timer1');
+const timer2 = document.getElementById('timer2');
+const timer3 = document.getElementById('timer3');
+const timer4 = document.getElementById('timer4');
 const newYear = new Date(2077, 0, 1);
 const timerId1 = setInterval(() => {
-  updateDate(title1, newYear, timerId1, 'До нового 2077 года остается');
+  updateDate(timer1, newYear, timerId1, 'До нового 2077 года остается');
 }, 1000);
 const timerId2 = setInterval(() => {
   updateDate(
-    title2,
+    timer2,
     new Date(2023, 8, 3),
     timerId2,
     'До третьего сентября 2023 остается'
@@ -114,7 +114,7 @@ const timerId2 = setInterval(() => {
 
 const timerId3 = setInterval(() => {
   updateDate(
-    title3,
+    timer3,
     new Date(2024, 5, 1),
     timerId3,
     'До следующего лета остается'
@@ -123,9 +123,9 @@ const timerId3 = setInterval(() => {
 
 const timerId4 = setInterval(() => {
   updateDate(
-    title4,
-    new Date(2023, 5, 18),
+    timer4,
+    new Date(2024, 0, 1),
     timerId4,
-    'До конца недели осталось'
+    'До нового года осталось'
   );
 }, 1000);
