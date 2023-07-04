@@ -1,23 +1,31 @@
-'use strict'
+'use strict';
 
-const URL = 'https://pokeapi.co/api/v2/';
+async function getPokemonEffect(pokemon, cb) {
 
-let xhr = new XMLHttpRequest();
-xhr.open('GET', `${URL}pokemon/ditto`);
-xhr.responseType = 'json';
-xhr.send();
+  const URL = 'https://pokeapi.co/api/v2/pokemon/';
 
-xhr.onload = function() {
-  const newXhr = new XMLHttpRequest();
-  const abilityURL = xhr.response.abilities[0].ability.url;
-  newXhr.open('GET', abilityURL);
-  newXhr.responseType = 'json';
-  newXhr.send();
-  newXhr.onload = function() {
-    function getData() {
-      return newXhr.response.effect_entries[1].effect;
-    }
-    console.log(getData());
-  }
-};
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', `${URL}${pokemon}`);
+  xhr.responseType = 'json';
+  xhr.send();
 
+  xhr.onload = function () {
+    const newXhr = new XMLHttpRequest();
+    const abilityURL = xhr.response.abilities[0].ability.url;
+    newXhr.open('GET', abilityURL);
+    newXhr.responseType = 'json';
+    newXhr.send();
+    newXhr.onload = function () {
+      const effect = newXhr.response.effect_entries[1].effect;
+      cb(effect)
+    };
+  };
+}
+
+function log(data) {
+  console.log(data);
+}
+
+getPokemonEffect('ditto', log);
+getPokemonEffect('pikachu', log);
+getPokemonEffect('bulbasaur', log);
