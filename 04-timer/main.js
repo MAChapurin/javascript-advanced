@@ -34,7 +34,6 @@ function updateDate(element, date, timerId, text = '') {
   const targetDate = date;
   const now = new Date();
   const restTime = targetDate - now;
-  // console.log(restTime)
   if (restTime <= 0) {
     clearInterval(timerId);
   }
