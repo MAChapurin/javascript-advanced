@@ -1,8 +1,12 @@
 'use strict';
+const POKEMON_EFFECT_URL = 'https://pokeapi.co/api/v2/pokemon/';
 
-function getPokemonEffect(name) {
-  const URL = 'https://pokeapi.co/api/v2/pokemon/';
-  fetch(`${URL}${name}`)
+function log(...args) {
+  console.log(...args);
+}
+
+function getPokemonEffect(pokemonName, effectUrl) {
+  return fetch(`${effectUrl}${pokemonName}`)
     .then((res) => res.json())
     .then((data) => {
       const { abilities } = data;
@@ -10,10 +14,9 @@ function getPokemonEffect(name) {
     })
     .then((res) => res.json())
     .then((data) => data.effect_entries[1].effect)
-    .then((data) => console.log(data))
     .catch((error) => console.log(error.message));
 }
 
-getPokemonEffect('bulbasaur');
-getPokemonEffect('pikachu');
-getPokemonEffect('ditto');
+getPokemonEffect('bulbasaur', POKEMON_EFFECT_URL).then(log);
+getPokemonEffect('pikachu', POKEMON_EFFECT_URL).then(log);
+getPokemonEffect('ditto', POKEMON_EFFECT_URL).then(log);

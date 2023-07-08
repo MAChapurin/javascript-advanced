@@ -1,26 +1,31 @@
 'use strict';
 
 function getCurrentCoords() {
-  const promise = new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(navigator.geolocation);
         resolve(position.coords);
       });
     } else {
       reject(Error('No suport geolocation'));
     }
   });
+}
 
-  promise.then((data) => {
-    const { latitude, longitude } = data;
-    document.querySelector('#pos').textContent = `${latitude} ${longitude}`;
-  });
-
-  promise.catch((er) => {
-    document.querySelector('#pos').textContent = er.message;
-  });
+function renderCoords(element) {
+  getCurrentCoords()
+    .then((data) => {
+      const { latitude, longitude } = data;
+      element.textContent = `${latitude} ${longitude}`;
+    })
+    .catch((error) => {
+      element.textContent = error.message;
+    });
 }
 
 const btn = document.querySelector('button');
-btn.addEventListener('click', getCurrentCoords);
+const position = document.querySelector('#pos');
+
+btn.addEventListener('click', () => {
+  renderCoords(position);
+});

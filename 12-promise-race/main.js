@@ -1,29 +1,29 @@
 'use strict';
 
+const USERS_URL = 'https://jsonplaceholder.typicode.com/users/';
+
+Promise.prototype.constructor.myRace = function (promises) {
+  return new Promise(function (resolve, reject) {
+    promises.map((promise) => promise.then(resolve, reject));
+  });
+};
+
 async function getUserById(id) {
-  const res = await fetch('https://jsonplaceholder.typicode.com/users/' + id);
+  const res = await fetch(`${USERS_URL}${id}`);
   if (!res.ok) {
-    throw new Error('Something go wrong!')
+    throw new Error('Something go wrong!');
   }
   const user = await res.json();
   return user;
 }
 
-
-async function race(arr) {
+async function raceUser(arr) {
   try {
-    const result = await Promise.race(arr);
+    const result = await Promise.myRace(arr);
     return result;
-  }
-  catch(e) {
+  } catch (e) {
     console.log(e.message);
   }
 }
 
-
-async function logUser(arr) {
-  const resultUser = await race(arr)
-  console.log(resultUser);
-}
-
-logUser([getUserById(1), getUserById(2), getUserById(13)])
+raceUser([getUserById(1), getUserById(2), getUserById(13)]).then(console.log);
