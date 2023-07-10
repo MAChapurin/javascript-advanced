@@ -5,8 +5,8 @@ function log(...args) {
   console.log(...args);
 }
 
-function getPokemonEffect(pokemonName, effectUrl) {
-  return fetch(`${effectUrl}${pokemonName}`)
+function getPokemonEffect(pokemonName) {
+  return fetch(`${POKEMON_EFFECT_URL}${pokemonName}`)
     .then((res) => res.json())
     .then((data) => {
       const { abilities } = data;
@@ -17,6 +17,6 @@ function getPokemonEffect(pokemonName, effectUrl) {
     .catch((error) => console.log(error.message));
 }
 
-getPokemonEffect('bulbasaur', POKEMON_EFFECT_URL).then(log);
-getPokemonEffect('pikachu', POKEMON_EFFECT_URL).then(log);
-getPokemonEffect('ditto', POKEMON_EFFECT_URL).then(log);
+getPokemonEffect('bulbasaur').then(log);
+getPokemonEffect('pikachu').then(log);
+getPokemonEffect('ditto').then(log);
