@@ -1,0 +1,19 @@
+{
+  "name": "15-build",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup ./src/index.js --file ./build/bundle.js --format iife",
+    "dev": "live-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "live-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "rollup": "^3.26.2"
+  }
+}
