@@ -1,21 +1,28 @@
+'use strict'
+
 const btnWrapper = document.querySelector('.btn-wrapper');
-const countElement = document.querySelector('.count');
+const btnsCount = document.querySelectorAll('.btn');
+const countSum = document.querySelector('.count');
+const countStore = {
+  count: 0,
+};
 
-function* incrementCount() {
-  let count = 0;
-  while (true) {
-    count += 1;
-    yield count;
-  }
-}
+btnsCount.forEach((_, index) => {
+  countStore[`btn${index + 1}`] = 0;
+});
 
-const addOne = incrementCount();
 
 btnWrapper.addEventListener('click', (e) => {
   const targetElement = e.target;
   if (targetElement.classList.contains('btn')) {
-    [...btnWrapper.children].map((el) => (el.textContent = 'Нажми меня'));
-    targetElement.textContent = 'Нажата';
-    countElement.textContent = addOne.next().value;
+    countStore.count += 1;
+    countStore[`btn${targetElement.dataset.number}`] += 1;
+    countSum.textContent = countStore.count;
+    [...btnWrapper.children].map((btn, index) => {
+      btn.textContent = `Нажми меня ${countStore[`btn${index + 1}`]}`;
+    });
+    targetElement.textContent = `Нажата ${
+      countStore[`btn${targetElement.dataset.number}`]
+    }`;
   }
 });
